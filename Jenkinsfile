@@ -120,3 +120,10 @@ spec:
         scp -i /c/Users/ernesto.alvarez/.ssh/id_rsa_jenkins -o StrictHostKeyChecking=no -rp $WORKSPACE/$deployment_cli_file $target_user@997725-DEV-EPIC-APP-01.signetomni.com:$war_deploy_dir
         echo' deploying'
         ssh -i /c/Users/ernesto.alvarez/.ssh/id_rsa_jenkins -o StrictHostKeyChecking=no $target_user@997725-DEV-EPIC-APP-01.signetomni.com "$cli_script --connect --controller=997725-DEV-EPIC-APP-01.signetomni.com:$target_port --timeout=20000 --file=$war_deploy_dir/$deployment_cli_file --user=$jbosscli_offline_user --password='98&OpUw2ZgBTE*R2'"
+			}
+		}
+	}
+   }
+ }
+}
+}
