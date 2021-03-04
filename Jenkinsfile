@@ -28,6 +28,8 @@ spec:
 					script {
 						withMaven(maven: 'MAVEN-3.6.3') {
               echo 'Building'
+		propfile = readProperties(file: './project.properties')
+		echo 'propfile['war_file']'				
                 cd SomsLite
                 gradle --no-daemon somslitebuild
                 pwd
