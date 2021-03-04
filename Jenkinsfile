@@ -63,7 +63,8 @@ spec:
 				container('gradle') {
 					script {
           withMaven(maven: 'MAVEN-3.6.3') {
-								if (propfile['feature_deploy'] == "true" ) {
+							propfile = readProperties(file: './project.properties')
+							if (propfile['feature_deploy'] == "true" ) {
 									USERNAME=propfile['USERNAME_FEATURE_DEPLOY']
 									HOSTS=propfile['HOSTS_FEATURE_DEPLOY']
 								}
@@ -77,17 +78,17 @@ spec:
 								}
 								HOSTS.tokenize(',').each { HOSTNAME ->
                 
-                cat << EOF > $deployment_cli_file
-              if (outcome != success) of /deployment=$war_file:read-resource
+                cat << EOF > propfile['deployment_cli_file']
+              if (outcome != success) of /deployment=propfile['war_file']:read-resource
               echo ###
-              echo ### Deploy $war.file to somslite-cluster
+              echo ### Deploy propfile['war_file'] to somslite-cluster
               echo ###
-              deploy $war_deploy_dir/$war_file --server-groups=$server_groups
+              deploy propfile['war_deploy_dir']/propfile['war_file'] --server-groups=propfile['server_groups']
               else
               echo ###
-              echo ### Module $war.file already installed, deploying with rolling update
+              echo ### Module propfile['war_file'] already installed, deploying with rolling update
               echo ###
-              deploy $war_deploy_dir/$war_file --name=$war_file --runtime-name=$war_file --headers={rollout $server_groups(rolling-to-servers=true)} --force
+              deploy propfile['war_deploy_dir']/propfile['war_file'] --name=propfile['war_file'] --runtime-name=propfile['war_file'] --headers={rollout propfile['server_groups'](rolling-to-servers=true)} --force
               end-if
 
               echo
@@ -113,13 +114,13 @@ spec:
         mv dev_app_1_config-mule.properties config-mule.properties
         mv dev_app_1_log4j.properties log4j.properties
         mv dev_app_1_config.properties config.properties
-        scp -i /c/Users/ernesto.alvarez/.ssh/id_rsa_jenkins -o StrictHostKeyChecking=no -rp $WORKSPACE/artifacts/$war_file $target_user@997725-DEV-EPIC-APP-01.signetomni.com:$war_deploy_dir
-        scp -i /c/Users/ernesto.alvarez/.ssh/id_rsa_jenkins -o StrictHostKeyChecking=no -rp $WORKSPACE/artifacts/properties/config-mule.properties $target_user@997725-DEV-EPIC-APP-01.signetomni.com:$property1_deploy_dir
-        scp -i /c/Users/ernesto.alvarez/.ssh/id_rsa_jenkins -o StrictHostKeyChecking=no -rp $WORKSPACE/artifacts/properties/log4j.properties $target_user@997725-DEV-EPIC-APP-01.signetomni.com:$property1_deploy_dir
-        scp -i /c/Users/ernesto.alvarez/.ssh/id_rsa_jenkins -o StrictHostKeyChecking=no -rp $WORKSPACE/artifacts/properties/config.properties $target_user@997725-DEV-EPIC-APP-01.signetomni.com:$property2_deploy_dir
-        scp -i /c/Users/ernesto.alvarez/.ssh/id_rsa_jenkins -o StrictHostKeyChecking=no -rp $WORKSPACE/$deployment_cli_file $target_user@997725-DEV-EPIC-APP-01.signetomni.com:$war_deploy_dir
+        scp -i /c/Users/ernesto.alvarez/.ssh/id_rsa_jenkins -o StrictHostKeyChecking=no -rp $WORKSPACE/artifacts/propfile['war_file'] $target_user@997725-DEV-EPIC-APP-01.signetomni.com:propfile['war_deploy_dir']
+        scp -i /c/Users/ernesto.alvarez/.ssh/id_rsa_jenkins -o StrictHostKeyChecking=no -rp $WORKSPACE/artifacts/properties/config-mule.properties $target_user@997725-DEV-EPIC-APP-01.signetomni.com:propfile['property1_deploy_dir']
+        scp -i /c/Users/ernesto.alvarez/.ssh/id_rsa_jenkins -o StrictHostKeyChecking=no -rp $WORKSPACE/artifacts/properties/log4j.properties $target_user@997725-DEV-EPIC-APP-01.signetomni.com:propfile['property1_deploy_dir']
+        scp -i /c/Users/ernesto.alvarez/.ssh/id_rsa_jenkins -o StrictHostKeyChecking=no -rp $WORKSPACE/artifacts/properties/config.properties $target_user@997725-DEV-EPIC-APP-01.signetomni.com:propfile['property2_deploy_dir']
+        scp -i /c/Users/ernesto.alvarez/.ssh/id_rsa_jenkins -o StrictHostKeyChecking=no -rp $WORKSPACE/propfile['deployment_cli_file'] propfile['target_user']@997725-DEV-EPIC-APP-01.signetomni.com:propfile['war_deploy_dir']
         echo' deploying'
-        ssh -i /c/Users/ernesto.alvarez/.ssh/id_rsa_jenkins -o StrictHostKeyChecking=no $target_user@997725-DEV-EPIC-APP-01.signetomni.com "$cli_script --connect --controller=997725-DEV-EPIC-APP-01.signetomni.com:$target_port --timeout=20000 --file=$war_deploy_dir/$deployment_cli_file --user=$jbosscli_offline_user --password='98&OpUw2ZgBTE*R2'"
+        ssh -i /c/Users/ernesto.alvarez/.ssh/id_rsa_jenkins -o StrictHostKeyChecking=no propfile['target_user']@997725-DEV-EPIC-APP-01.signetomni.com "propfile['cli_script'] --connect --controller=997725-DEV-EPIC-APP-01.signetomni.com:propfile['target_port'] --timeout=20000 --file=propfile['war_deploy_dir']/propfile['deployment_cli_file'] --user=propfile['jbosscli_offline_user'] --password='98&OpUw2ZgBTE*R2'"
 			}
 		}
 	}
