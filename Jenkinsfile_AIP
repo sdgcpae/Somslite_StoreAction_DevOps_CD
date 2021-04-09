@@ -61,7 +61,7 @@ spec:
 								echo "Pulling artifact from the repository to deploy"
 								sh "mvn org.apache.maven.plugins:maven-dependency-plugin:2.8:get \
 									-DrepoUrl=https://archiva.sgnt.devops.accentureanalytics.com/repository/snapshots \
-									-Dartifact=io.buildpacks.example.sample:${propfile['artifact_name']}:jar -Ddest=$WORKSPACE/artifacts/myfile.jar"
+									-Dartifact=io.buildpacks.example:sample:${propfile['artifact_name']}:jar -Ddest=$WORKSPACE/artifacts/myfile.jar"
 								sh "ls -la $WORKSPACE/artifacts"
                							 /*
 								/* sh 'ssh ${USERNAME}@${HOSTNAME} "$ESB_BIN_PATH stop || sleep 20"'
