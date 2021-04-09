@@ -52,7 +52,7 @@ spec:
 							HOSTS.tokenize(',').each { HOSTNAME ->
 								echo 'Use the lines below when we switch to the actual EJB repo'
 								echo "${HOSTNAME}"
-								echo 'I am deploying the artifact ${propfile['artifact_name']} into the target environment ${HOSTNAME} as user ${USERNAME}'
+								echo "I am deploying the artifact ${propfile['artifact_name']} into the target environment ${HOSTNAME} as user ${USERNAME}"
 								echo 'Replace all the lines below for EJB and add the parameters to propfile and make refrences below'
 								echo 'Accom logic for multiple env and mult servers in each env based on the branch name'
 								echo 'shutting down the tomcat ESB server'
