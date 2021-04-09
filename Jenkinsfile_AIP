@@ -56,6 +56,14 @@ spec:
 								echo 'Replace all the lines below for EJB and add the parameters to propfile and make refrences below'
 								echo 'Accom logic for multiple env and mult servers in each env based on the branch name'
 								echo 'shutting down the tomcat ESB server'
+								/*
+             							  sh "mkdir -p $WORKSPACE/artifacts"
+								echo "Pulling artifact from the repository to deploy"
+								sh "mvn org.apache.maven.plugins:maven-dependency-plugin:2.8:get \
+									-DrepoUrl=https://archiva.sgnt.devops.accentureanalytics.com/repository/snapshots \
+									-Dartifact=io.buildpacks.example:sample:EJB_DevOps-dev-build-6-SNAPSHOT:jar -Ddest=$WORKSPACE/artifacts/myfile.jar"
+								sh "ls -la $WORKSPACE/artifacts"
+               							 /*
 								/* sh 'ssh ${USERNAME}@${HOSTNAME} "$ESB_BIN_PATH stop || sleep 20"'
 								echo 'force stop any remaining mule process'
 								sh 'ssh ${USERNAME}@${HOSTNAME} "if [[ $(ps aux | grep /opt/mule/latest/ | grep -vc grep)  > 0 ]]; then "kill -9 $(ps -ef|pgrep -f "/opt/mule/latest/bin")"; else echo "do nothing"; fi"' 
